@@ -1,0 +1,37 @@
+
+[[ports]]
+localPort = 8080
+externalPort = 80
+
+modules = ["nodejs-20", "web"]
+run = "node index.js"
+
+[nix]
+channel = "stable-24_05"
+
+[env]
+REPLIT_DISABLE_PACKAGE_LAYER = "1"
+
+[deployment]
+run = ["sh", "-c", "node body.js"]
+build = ["sh", "-c", "yarn install --network-timeout 1000000"]
+
+[workflows]
+runButton = "Run Bot"
+
+[[workflows.workflow]]
+name = "Run Bot"
+author = 41126571
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "yarn install "
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "node body.js"
+
+[[ports]]
+localPort = 8080
+externalPort = 80
